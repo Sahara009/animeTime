@@ -1,0 +1,21 @@
+@import "./reset.scss";
+@import "./layout.scss";
+@import "./homepage.scss";
+@import "./modal.scss";
+@import "./serials.scss";
+
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@100;300;400;500;700;800;900&display=swap");
+
+* {
+  font-family: "Inconsolata";
+  // border: 1px solid red;
+}
+body {
+  background-color: rgb(23, 23, 37);
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
