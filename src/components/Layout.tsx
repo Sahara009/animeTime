@@ -3,10 +3,21 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import "../styles/layout.scss";
 import { MenuIcon } from "lucide-react";
 import { Modal } from "./Modal";
+import { ThemeProvider, createTheme } from "@mui/material";
+import { Input } from "./Input";
+import { Footer } from "./Footer";
+// import { Input } from "./Input";
 
 interface Props {
   className?: string;
 }
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#E91E63", // Розовый цвет
+    },
+  },
+});
 
 export const Layout: React.FC<Props> = () => {
   const [popup, setPopup] = useState(false);
@@ -16,7 +27,7 @@ export const Layout: React.FC<Props> = () => {
   };
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <header className="header">
         <div
           className="container"
@@ -31,10 +42,11 @@ export const Layout: React.FC<Props> = () => {
               AnimeTime
             </Link>
           </div>
+          <Input />
           <nav className="header_list">
-            <NavLink to={"/serials"}>Serials</NavLink>
-            <NavLink to={"/genres"}>Genres</NavLink>
-            <NavLink to={"/random"}>Random</NavLink>
+            <NavLink to={"/serials"}>Список</NavLink>
+            <NavLink to={"/filters"}>Фильтрация</NavLink>
+            <NavLink to={"/random"}>Случайное</NavLink>
           </nav>
           {!popup ? (
             <MenuIcon className="menu-icon" onClick={() => handlerModal()} />
@@ -45,7 +57,8 @@ export const Layout: React.FC<Props> = () => {
       </header>
 
       <Outlet />
-      <footer>soon</footer>
-    </>
+
+      <Footer />
+    </ThemeProvider>
   );
 };

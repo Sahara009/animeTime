@@ -9,14 +9,14 @@ interface Props {
 
 export const AnimeCard: React.FC<Props> = ({ item }) => {
   return (
-    <div key={item?.id} style={{ width: 265 }}>
+    <div key={item?.id} style={{ position: "relative" }}>
       <Link to={`/serials/${item?.code}`}>
         <img
           className="posters-item"
           src={`https://static-libria.weekstorm.one${item?.posters.original.url}`}
           alt="картинка"
         />
-        <p className="anime_name">{item?.names.en}</p>
+        <p className="anime_name">{item?.names.ru}</p>
       </Link>
     </div>
   );

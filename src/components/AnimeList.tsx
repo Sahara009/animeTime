@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { getAnimeUpdates } from "../api";
 import { List } from "../types/schedule.type";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { AnimeCard } from "./AnimeCard";
+import Skeleton from "react-loading-skeleton";
+import loading from "../assets/river-city-girls-rcg.gif";
 
 interface Props {
   className?: string;
@@ -26,36 +29,45 @@ export const AnimeList: React.FC<Props> = () => {
   };
 
   const fetchMoreData = () => {
-    setPage((prevPage) => prevPage + 1); // Увеличиваем номер страницы
+    setPage((prevPage) => prevPage + 1);
   };
 
   useEffect(() => {
-    createList(page); // Загружаем данные при изменении страницы
-  }, [page]);
-
-  useEffect(() => {
-    createList(page); // Загружаем данные при изменении страницы
+    createList(page);
   }, [page]);
 
   console.log(list);
 
   if (list.length == 0) {
-    return <h1>soon</h1>;
+    return (
+      <div className="skeletons container">
+        <Skeleton
+          baseColor="#363737"
+          className="skeleton"
+          width={245}
+          height={350}
+          count={15}
+        />
+      </div>
+    );
   }
+
   return (
-    <div>
-      <nav>
+    <div className="list">
+      <nav className="container">
         <InfiniteScroll
           dataLength={list.length}
           next={fetchMoreData}
           hasMore={hasMore}
-          loader={<h4>Loading...</h4>}
+          loader={<img className="loading" src={loading} />}
         >
-          {list.map((anime, index) => (
-            <li className="list_item" key={index}>
-              {anime.names.en}
-            </li>
-          ))}
+          <ul className="list_anime">
+            {list.map((item, index) => (
+              <div className="list_anime-item">
+                <AnimeCard key={index} item={item} />
+              </div>
+            ))}
+          </ul>
         </InfiniteScroll>
       </nav>
     </div>

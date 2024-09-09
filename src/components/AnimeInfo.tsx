@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getTitles } from "../api";
+import { getTitleInfo } from "../api";
 import { useParams } from "react-router-dom";
 import { List } from "../types/schedule.type";
 import ReactPlayer from "react-player";
@@ -17,7 +17,7 @@ export const AnimeInfo: React.FC<Props> = () => {
 
   const createTitle = async () => {
     if (code) {
-      const data = await getTitles(code);
+      const data = await getTitleInfo(code);
       console.log(data);
       setTitle(data);
     } else {
